@@ -12,7 +12,6 @@ export default function Counter() {
       alert("You clicked on: " + count);
     }, 1000);
   }
-
   return (
     <div>
       <p>You clicked {count} times</p>
