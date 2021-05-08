@@ -11,13 +11,6 @@ export default function Layout({
   children: React.ReactNode;
   home?: boolean;
 }) {
-  /*
-   * Added this to toggle the is-active className. See:
-   *
-   * https://bulma.io/documentation/components/navbar/#navbar-menu
-   * https://github.com/jgthms/bulma/issues/856
-   */
-
   return (
     <>
       <Head>

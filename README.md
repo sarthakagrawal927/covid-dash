@@ -7,3 +7,7 @@ cd client
 yarn
 yarn dev
 ```
+
+## Tech Stack
+
+Front-end : NextJS with Typescript and Bulma CSS framwork.
