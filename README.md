@@ -10,4 +10,4 @@ yarn dev
 
 ## Tech Stack
 
-Front-end : NextJS with Typescript and Bulma CSS framwork.
+Front-end : NextJS and Bulma CSS framwork.

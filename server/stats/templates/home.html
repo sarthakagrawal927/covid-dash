@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}HOME{% endblock title%}
+
+{% block body %}
+   {% for i in range(0,30)) %}
+     <h2>{{stats['state_wise'][i]}}</h2>
+     <!-- <p>{{state.state_wise.recovered}}</p> -->
+   {% endfor %}
+
+{% endblock body %}
