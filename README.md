@@ -11,3 +11,4 @@ yarn dev
 ## Tech Stack
 
 Front-end : NextJS and Bulma CSS framwork.
+Backend : Django
