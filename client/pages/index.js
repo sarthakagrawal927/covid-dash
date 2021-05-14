@@ -2,8 +2,35 @@ import Head from "next/head";
 import React from "react";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
+import { IndiaMap } from "../components/IndiaMap";
+import { Pie, Doughnut, Bar } from "react-chartjs-2";
 
-export default function Home({ statewise_array }) {
+function getRandomColor() {
+  var letters = "0123456789ABCDEF";
+  var color = "#";
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+export default function Home({
+  statewise_array,
+  labels,
+  dataFields,
+  colors,
+  MapData,
+}) {
+  const data = {
+    labels: labels,
+    datasets: [
+      {
+        label: "Number of cases",
+        data: dataFields,
+        backgroundColor: colors,
+      },
+    ],
+  };
   return (
     <>
       {statewise_array.map((state, index) => {
@@ -22,6 +49,10 @@ export default function Home({ statewise_array }) {
           </React.Fragment>
         );
       })}
+      <Pie data={data} />
+      <Doughnut data={data} />
+      <Bar data={data} />
+      <IndiaMap mapData={MapData} />
     </>
   );
 }
@@ -42,6 +73,7 @@ export async function getStaticProps() {
       notFound: true,
     };
   }
+
   const statewise = data.state_wise;
   const statewise_array = Object.entries(statewise);
   for (let i = 0; i < statewise_array.length; i++) {
@@ -59,7 +91,33 @@ export async function getStaticProps() {
       statewise_array[i][0].district[j].shift();
     }
   }
+
+  let labels = [];
+  let dataFields = [];
+  let colors = [];
+  let MapData = [];
+
+  for (let i = 0; i < statewise_array.length - 1; i++) {
+    labels.push(statewise_array[i][0].state);
+    dataFields.push(statewise_array[i][0].active);
+    colors.push(getRandomColor());
+
+    if (statewise_array[i][0].statecode === "OR")
+      statewise_array[i][0].statecode = "OD";
+    else if (statewise_array[i][0].statecode === "TG")
+      statewise_array[i][0].statecode = "TS";
+    else if (statewise_array[i][0].statecode === "UT")
+      statewise_array[i][0].statecode = "UK";
+
+    MapData.push({
+      id: statewise_array[i][0].statecode,
+      state: statewise_array[i][0].state,
+      value: statewise_array[i][0].active,
+    });
+  }
+  console.log(MapData);
+
   return {
-    props: { statewise_array }, // will be passed to the page component as props
+    props: { statewise_array, labels, dataFields, colors, MapData }, // will be passed to the page component as props
   };
 }
