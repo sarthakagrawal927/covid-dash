@@ -10,6 +10,6 @@ yarn dev
 
 ## Tech Stack
 
-Front-end : NextJS and Bulma CSS framwork.CSS todo :)
+Front-end : NextJS and Bulma CSS framwork. CSS todo :)
 
 Displays beautiful map and charts tho
